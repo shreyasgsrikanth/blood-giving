@@ -118,9 +118,9 @@
 						  
 						   
 						    <li style="padding-left:100px;">
-                                    <a href="dashboard">
+                                    <a href="adminhome">
                                         <span class="pcoded-micon"><i class="ti-dashboard"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.dash.main">Dashboard</span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.dash.main">Home</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -133,19 +133,13 @@
                                     </a>
                                 </li>
 								 <li>
-                                    <a href="forecast">
+                                    <a href="manusers">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Search Donors</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Manage Users </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="forecastyear">
-                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Search Bloodtype</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                               
 								 <li>
                                     <a href="dataloader">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b></b></span>
@@ -200,7 +194,7 @@
                            
                             <ul class="pcoded-item pcoded-left-item">
 							<li style="padding-top:10px;">
-                                    <a href="dashboard">
+                                    <a href="adminhome">
                                         <span class="pcoded-micon"><i class="ti-dashboard"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -213,27 +207,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-								 <li>
-                                    <a href="forecast">
-                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Search Donors</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="forecastyear">
-                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Search Bloodtype</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-								 <li>
-                                    <a href="dataloader">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Data Mart</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+								
 								
                             </ul>
                          
@@ -293,6 +267,7 @@
 					
 																			<th>HB</th>
 																			<th>Blood Group</th>
+																			<th>Mobile Number</th>
                                                                             <th>Donor Type</th>
                          
                                                                         </tr>
@@ -314,7 +289,7 @@
 	
     <td>{{item[9]}} </td>
     <td>{{item[11]}} </td>
-    <td>{{item[13]}} </td>
+    <td>{{item[12]}} </td>
 
 </tr>
 {% endfor %}

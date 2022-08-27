@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Blood Donors</title>
+    <title>Automated Deferral Blood/Organ Donation Bank</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -117,21 +117,7 @@
                            </li>
 						  
 						   
-						    <li style="padding-left:100px;">
-                                    <a href="dashboard">
-                                        <span class="pcoded-micon"><i class="ti-dashboard"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-							<li>
-                                    <a href="planning">
-                                        <span class="pcoded-micon"><i class="ti-user"></i><b></b></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.dash.main">Planning</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-								 <li class="active" style="font-size:18px;font-weight:bolder;">
+						   <li>
                                     <a href="forecast">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" style="
@@ -139,21 +125,38 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                <li  class="active" style="font-size:18px;font-weight:bolder;">
                                     <a href="forecastyear">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Search Bloodtype</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-								 <li>
-                                    <a href="dataloader">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Data Mart</span>
+								<li>
+                                    <a href="forecastdonar">
+                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
+                                        <span class="pcoded-mtext" style="
+    color: #0f0f10;" data-i18n="nav.dash.main">Search Organ Donar</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
 								
+								<li>
+                                    <a href="organdonate">
+                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
+                                        <span class="pcoded-mtext" style="
+    color: #0f0f10;" data-i18n="nav.dash.main">Donate Organ</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="blooddonate">
+                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
+                                        <span class="pcoded-mtext" style="
+    color: #0f0f10;" data-i18n="nav.dash.main">Donate Blood</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                        </ul>
                        <ul class="nav-right">
                            
@@ -200,20 +203,7 @@
                             
                            
                             <ul class="pcoded-item pcoded-left-item">
-							<li style="padding-top:10px;">
-                                    <a href="dashboard">
-                                        <span class="pcoded-micon"><i class="ti-dashboard"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-								 <li >
-                                    <a href="planning">
-                                        <span class="pcoded-micon"><i class="ti-user"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Planning</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+							
 								 <li  class="active" style="font-size:18px;font-weight:bolder;">
                                     <a href="forecast">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
@@ -228,10 +218,28 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-								 <li>
-                                    <a href="dataloader">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b></b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Data Mart</span>
+								 	<li>
+                                    <a href="organdonate">
+                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
+                                        <span class="pcoded-mtext" style="
+    color: #0f0f10;" data-i18n="nav.dash.main">Donate Organ</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="forecastdonar">
+                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
+                                        <span class="pcoded-mtext" style="
+    color: #0f0f10;" data-i18n="nav.dash.main">Search Organ Donar</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+								
+								<li>
+                                    <a href="blooddonate">
+                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
+                                        <span class="pcoded-mtext" style="
+    color: #0f0f10;" data-i18n="nav.dash.main">Donate Blood</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -267,11 +275,11 @@
 	</div>
 <h5>Your Current location is {{curloc}}</h5>	
 <br/>
-<h6>Your Lattitude is </h6>{{glat}}
-<h6>Your Longitude is </h6>{{glon}}
+<h6>Your Lattitude is </h6>{{glat}}<br><br>
+<h6>Your Longitude is </h6>{{glon}}<br><br>
 
 <label>Enter the location : </label><input type="text" id="loc" name="loc" />
-<input type="button" id="btnpredict" value="Fetch prediction" />
+<input type="button" id="btnpredict" value="Fetch Results" />
 	<h1>Donors data of {{curloc}} region</h1>
 											<!-- tabs card start -->
                                             <div class="col-sm-12">
@@ -301,7 +309,7 @@
 																			<th>HB</th>
 																			<th>BP</th>
                                                                             <th>Blood Type</th>
-                         
+																			<th>Phone Number</th>
                                                                         </tr>
                                                                        
                                                                        
@@ -309,7 +317,7 @@
 <tr>
       <td>{{item[0]}}</td>
     <td>{{item[1]}}</td>
-	
+	<td>{{item[2]}}</td>
     <td>{{item[3]}}</td>
     <td>{{item[4]}}</td>
     <td>{{item[5]}}</td>

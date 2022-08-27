@@ -86,19 +86,69 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/cropdata')
-def crop():
-    return render_template('cropdata.html')
+
 
 @app.route('/forecastyear')
 def forecastyea():
     return render_template('forecastyear.html')
 
-@app.route('/regorg', methods =  ['GET','POST'])
+@app.route('/forecastdonar')
+def forecastdonar():
+    return render_template('forecastdonar.html')
+
+@app.route('/regorg', methods =  ['POST'])
 def regorg():
-    connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
-    
-    
+    if request.method =='POST':
+        connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+        print('----')
+        oname = request.form.get('oname')
+
+        oemail = request.form.get('oemail')
+        ophone = request.form.get('ophone')    
+        oreason = request.form.get('oreason')
+        age = request.form.get('age')
+        gender = request.form.get('gender')
+        cp = request.form.get('cp')
+        trestbps = request.form.get('trestbps')
+        ca = request.form.get('ca')    
+        thal = request.form.get('thal')
+        oldpeak = request.form.get('oldpeak')
+        chol = request.form.get('chol')
+
+
+        fbs = request.form.get('fbs')
+        restecg = request.form.get('restecg')    
+        thalach = request.form.get('thalach')
+        exang = request.form.get('exang')
+
+        prod_mas = request.files.get('filedata1')
+        filename = secure_filename(prod_mas.filename)
+        prod_mas.save(os.path.join("D:\\finalbloodorgan_updated\\finalbloodorgan\\Blood And Organ Donar\\static\\assets\\Upload\\", filename))
+        prod_mas1 = request.files['filedata2']
+        filename1 = secure_filename(prod_mas1.filename)
+        prod_mas1.save(os.path.join("D:\\finalbloodorgan_updated\\finalbloodorgan\\Blood And Organ Donar\\static\\assets\\Upload\\", filename1))
+
+        print('-------------------------')
+        
+        cursor = connection.cursor()
+        sql_Query = "insert into organdata values('"+oname+"','"+oemail+"','"+ophone+"','"+oreason+"','"+age+"','"+gender+"','"+cp+"','"+trestbps+"','"+ca+"','"+thal+"','"+oldpeak+"','"+chol+"','"+fbs+"','"+restecg+"','"+thalach+"','"+exang+"','"+filename+"','"+filename1+"','Pending')"
+        
+        cursor.execute(sql_Query)
+        print(sql_Query)
+        connection.commit() 
+        connection.close()
+        cursor.close()
+        msg="Data stored successfully"
+        #msg = json.dumps(msg)
+        resp = make_response(json.dumps(msg))
+        print(resp)
+        print(msg, flush=True)
+        #return render_template('register.html',data=msg)
+        return resp
+  
+@app.route('/blooddonate')    
+def blooddonate():
+    return render_template('blooddonate.html')
 
 
 """ REGISTER CODE  """
@@ -109,7 +159,7 @@ def regdata():
 	uname = request.args['uname']
 	name = request.args['name']
 	pswd = request.args['pswd']
-	email = request.args['email']
+	email = ''
 	phone = request.args['phone']
 	addr = request.args['addr']
 	value = randint(123, 99999)
@@ -132,87 +182,8 @@ def regdata():
 	#return render_template('register.html',data=msg)
 	return resp
 
-@app.route('/cdata', methods =  ['GET','POST'])
-def cropdata():
-    if request.method == 'GET':
-        print('hi')
-        Dyear = request.args['year']
-        print(Dyear,flush=True)
-        connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
-        Dyear = request.args['year']
-        print(Dyear,flush=True)
-        Rainfall = request.args['rain']
-        Region = request.args['reagon']
-        Area = request.args['area']
-        Lattitude = request.args['lati']
-        Longitude = request.args['log']
-        Humidity = request.args['himudity']
-        Min_Temperature = request.args['mintemp']
-        Max_Temperature = request.args['maxtemp']
-        Min_Ph = request.args['minph']
-        Max_Ph = request.args['maxp']
-        Fertilizer = request.args['freti']
-        Crop = request.args['crops']
-        Month = request.args['months']
-        Sorouteng= request.args['snorouteng']
-        Others= request.args['other']
-        Investment = request.args['invest']
-        Yield= request.args['yld']
-        MarketPrice= request.args['marketprice']
-        TotalValue = request.args['ttamt']
-        Profit= request.args['profit']
-        Seeds = request.args['seeds']   
-        cursor = connection.cursor()
-        sql_Query = "insert into  flaskpfdb values('"+Dyear+"','"+Rainfall+"','"+Region+"','"+Area+"','"+Lattitude+"','"+Longitude+"','"+Humidity+"','"+Min_Temperature+"','"+Max_Temperature+"','"+Min_Ph+"','"+Max_Ph+"','"+Fertilizer+"','"+Crop+"','"+Month+"','"+Sorouteng+"','"+Others+"','"+Investment+"','"+Yield+"','"+MarketPrice+"','"+TotalValue+"','"+Profit+"','"+Seeds+"')"    
-        print(sql_Query)
-        cursor.execute(sql_Query)
-        connection.commit() 
-        connection.close()
-        cursor.close()
-        msg="Data stored successfully"
-        resp = make_response(json.dumps(msg))
-        print(resp)
-        print(msg, flush=True)
-        return resp
-
-
-
-    
-"""LOGIN CODE """
-
-@app.route('/logdata', methods =  ['GET','POST'])
-def logdata():
-	connection=mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
-	lgemail=request.args['email']
-	lgpssword=request.args['pswd']
-	print(lgemail, flush=True)
-	print(lgpssword, flush=True)
-	cursor = connection.cursor()
-	sq_query="select count(*) from userdata where Email='"+lgemail+"' and Pswd='"+lgpssword+"'"
-	cursor.execute(sq_query)
-	data = cursor.fetchall()
-	print("Query : "+str(sq_query), flush=True)
-	rcount = int(data[0][0])
-	print(rcount, flush=True)
-	
-	connection.commit() 
-	connection.close()
-	cursor.close()
-	
-	if rcount>0:
-		msg="Success"
-		resp = make_response(json.dumps(msg))
-		return resp
-	else:
-		msg="Failure"
-		resp = make_response(json.dumps(msg))
-		return resp
-		
-   
-
-
-@app.route('/dashboard')
-def dashboard():
+@app.route('/adminhome')
+def adminhome():
     try:        
         g = geocoder.ip('me')
         print(g.latlng[0])
@@ -222,19 +193,19 @@ def dashboard():
     try:        
         connection=mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
         cursor = connection.cursor()
-        sq_query="select count(*) from userdata"
+        sq_query="select D_grp,count(*) from pfdataset group by D_grp;"
         cursor.execute(sq_query)
         data = cursor.fetchall()
         print("Query : "+str(sq_query), flush=True)
-        rcount = int(data[0][0])
-        print(rcount, flush=True)
+        dbcount = data
+        print(dbcount, flush=True)
 
-        sq_query="select count(distinct D_region) from pfdataset"
+        sq_query="select D_region,count(*) from pfdataset group by D_region"
         cursor.execute(sq_query)
         data = cursor.fetchall()
         print("Query : "+str(sq_query), flush=True)
-        regcount = int(data[0][0])
-        print(regcount, flush=True)
+        drcount = data
+        print(drcount, flush=True)
 
         sq_query="select count(distinct D_grp) from pfdataset"
         cursor.execute(sq_query)
@@ -331,10 +302,253 @@ def dashboard():
         connection.commit() 
         connection.close()
         cursor.close()
-        return render_template('dashboard.html',pplcount=rcount,regcount=regcount,ccount=ccount,dscount=dscount,gdata=gdata,adata=adata,a1data=a1data,bdata=bdata,b1data=b1data,abdata=abdata,ab1data=ab1data,odata=odata,o1data=o1data)
+        return render_template('adminhome.html',dbcount=dbcount,drcount=drcount,pplcount=rcount,regcount=regcount,ccount=ccount,dscount=dscount,gdata=gdata,adata=adata,a1data=a1data,bdata=bdata,b1data=b1data,abdata=abdata,ab1data=ab1data,odata=odata,o1data=o1data)
     except:
         print("No Data to be Displayed")
-        return render_template('dashboard.html')
+        return render_template('adminhome.html')
+
+
+@app.route('/manusers')
+def manusers():
+    connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+    cursor = connection.cursor()
+    sq_query="select * from userdata"
+    cursor.execute(sq_query)
+    print(sq_query)
+    data = cursor.fetchall()
+    print(data)
+    connection.close()
+    cursor.close()        
+    return render_template('manusers.html',data=data)
+
+@app.route('/delete')
+def delete():    
+    connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+    cursor = connection.cursor()
+    email=request.args["Email"]
+    
+    sq_query="delete from userdata where Email='"+email+"'"
+    cursor.execute(sq_query)
+    connection.commit() 
+
+    sq_query="select * from userdata"
+    cursor.execute(sq_query)
+    print(sq_query)
+    data = cursor.fetchall()
+    print(data)
+    connection.close()
+    cursor.close()        
+    return render_template('manusers.html',data=data)
+
+@app.route('/validate')
+def validate():    
+    connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+    cursor = connection.cursor()
+    phone=request.args["Phone"]
+    
+    sq_query="update organdata set Status='Accepted' where Phone='"+phone+"'"
+    print(sq_query)
+    cursor.execute(sq_query)
+    connection.commit() 
+
+    connection.close()
+    cursor.close()        
+    return render_template('organplanning.html') 
+
+
+
+@app.route('/cdata', methods =  ['GET','POST'])
+def cropdata():
+    if request.method == 'GET':
+        print('hi')
+        Dyear = request.args['year']
+        print(Dyear,flush=True)
+        connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+        Dyear = request.args['year']
+        print(Dyear,flush=True)
+        Rainfall = request.args['rain']
+        Region = request.args['reagon']
+        Area = request.args['area']
+        Lattitude = request.args['lati']
+        Longitude = request.args['log']
+        Humidity = request.args['himudity']
+        Min_Temperature = request.args['mintemp']
+        Max_Temperature = request.args['maxtemp']
+        Min_Ph = request.args['minph']
+        Max_Ph = request.args['maxp']
+        Fertilizer = request.args['freti']
+        Crop = request.args['crops']
+        Month = request.args['months']
+        Sorouteng= request.args['snorouteng']
+        Others= request.args['other']
+        Investment = request.args['invest']
+        Yield= request.args['yld']
+        MarketPrice= request.args['marketprice']
+        TotalValue = request.args['ttamt']
+        Profit= request.args['profit']
+        Seeds = request.args['seeds']   
+        cursor = connection.cursor()
+        sql_Query = "insert into  flaskpfdb values('"+Dyear+"','"+Rainfall+"','"+Region+"','"+Area+"','"+Lattitude+"','"+Longitude+"','"+Humidity+"','"+Min_Temperature+"','"+Max_Temperature+"','"+Min_Ph+"','"+Max_Ph+"','"+Fertilizer+"','"+Crop+"','"+Month+"','"+Sorouteng+"','"+Others+"','"+Investment+"','"+Yield+"','"+MarketPrice+"','"+TotalValue+"','"+Profit+"','"+Seeds+"')"    
+        print(sql_Query)
+        cursor.execute(sql_Query)
+        connection.commit() 
+        connection.close()
+        cursor.close()
+        msg="Data stored successfully"
+        resp = make_response(json.dumps(msg))
+        print(resp)
+        print(msg, flush=True)
+        return resp
+
+
+
+    
+"""LOGIN CODE """
+
+@app.route('/logdata', methods =  ['GET','POST'])
+def logdata():
+	connection=mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+	lgemail=request.args['email']
+	lgpssword=request.args['pswd']
+	print(lgemail, flush=True)
+	print(lgpssword, flush=True)
+	cursor = connection.cursor()
+	sq_query="select count(*) from userdata where Phone='"+lgemail+"' and Pswd='"+lgpssword+"'"
+	cursor.execute(sq_query)
+	data = cursor.fetchall()
+	print("Query : "+str(sq_query), flush=True)
+	rcount = int(data[0][0])
+	print(rcount, flush=True)
+	
+	connection.commit() 
+	connection.close()
+	cursor.close()
+	
+	if rcount>0:
+		msg="Success"
+		resp = make_response(json.dumps(msg))
+		return resp
+	else:
+		msg="Failure"
+		resp = make_response(json.dumps(msg))
+		return resp
+		
+   
+
+
+@app.route('/dashboard')
+def dashboard():
+    try:        
+        g = geocoder.ip('me')
+        print(g.latlng[0])
+        print(g.latlng[1])
+    except:
+        print("Done")       
+    connection=mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+    cursor = connection.cursor()
+    sq_query="select count(*) from userdata"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    rcount = int(data[0][0])
+    print(rcount, flush=True)
+
+    cursor = connection.cursor()
+    sq_query="select count(distinct D_region) from pfdataset"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    regioncount = int(data[0][0])
+    print(rcount, flush=True)
+
+    sq_query="select D_region,count(*) from pfdataset group by D_region"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    regcount = data
+    print(regcount, flush=True)
+
+    sq_query="select D_grp,count(*) from pfdataset group by D_grp;"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    ccount = data
+    print(ccount, flush=True)
+
+    sq_query="select count(*) from pfdataset"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    dscount = int(data[0][0])
+    print(dscount, flush=True)
+
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='A +ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    adata = int(data[0][0])
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='A -ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    a1data = int(data[0][0])
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='B +ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    bdata = int(data[0][0])
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='B -ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    b1data = int(data[0][0])
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='AB +ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    abdata = int(data[0][0])
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='AB -ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    ab1data = int(data[0][0])
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='O +ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    odata = int(data[0][0])
+
+    sq_query="select count(D_grp) from pfdataset where D_grp='O -ve'"
+    cursor.execute(sq_query)
+    data = cursor.fetchall()
+    print("Query : "+str(sq_query), flush=True)
+    print(data)
+    o1data = int(data[0][0])
+
+
+
+  
+    #gdata = data
+    #print(gdata, flush=True)
+    
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    return render_template('dashboard.html',pplcount=rcount,regcount=regcount,ccount=ccount,dscount=dscount,regioncount=regioncount)
 
 @app.route('/dataloader')
 def dataloader():
@@ -364,10 +578,10 @@ def upldfile():
     
         prod_mas = request.files['prod_mas']
         filename = secure_filename(prod_mas.filename)
-        prod_mas.save(os.path.join("H:\\Upload\\", filename))
+        prod_mas.save(os.path.join("D:\\Upload\\", filename))
 
         #csv reader
-        fn = os.path.join("H:\\Upload\\", filename)
+        fn = os.path.join("D:\\Upload\\", filename)
 
         # initializing the titles and rows list 
         fields = [] 
@@ -424,6 +638,22 @@ def planning():
     return render_template('planning.html', data=data)
 
 
+@app.route('/organplanning')
+def organplanning():
+    connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+    sql_select_Query = "select * from organdata limit 100"
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    data = cursor.fetchall()
+    connection.close()
+    cursor.close()
+
+
+   
+    
+    return render_template('organplanning.html', data=data)
+
+
 
 
 @app.route('/forecast')
@@ -442,7 +672,7 @@ def forecast():
     #print(xyz[1])
     #loc=xyz[0][1:]+", "+xyz[1]
     connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
-    sql_select_Query = "select * from pfdataset where D_region='MYSURU' and D_date like '%2020%'"
+    sql_select_Query = "select * from pfdataset where D_region='MYSURU'"
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
     data = cursor.fetchall()
@@ -489,14 +719,14 @@ def locdata():
         loc="Chamrajnagar, Karnataka"
     connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
     #sql_select_Query = "select * from pfdataset where Area='"+cloc+"' and Month='"+month+"' and (DYear='2018' or DYear='2019')"
-    sql_select_Query = "select * from pfdataset where D_region like '%"+cloc+"%' and D_date like '%2020%'"
+    sql_select_Query = "select * from pfdataset where D_region like '%"+cloc+"%'"
     print(sql_select_Query)
     cursor = connection.cursor()
 
     chartval=[]
     chartval1=[]
     
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='B +ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where D_grp='B +ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata)
@@ -510,7 +740,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])-2000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='A +ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where D_grp='A +ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -523,7 +753,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])-1000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='O +ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where  D_grp='O +ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -536,7 +766,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])+1000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='O -ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where  D_grp='O -ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -549,7 +779,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])+2000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='B -ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where  D_grp='B -ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -562,7 +792,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])-1000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='AB +ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where  D_grp='AB +ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -574,7 +804,7 @@ def locdata():
     demo1.append('Jun')
     demo1.append(int(tempdata[0][0])+1000)
     chartval1.append(demo1)
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='A -ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where D_grp='A -ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -587,7 +817,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])-2000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_grp) from pfdataset where D_date like '%2020%' and D_grp='AB -ve' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_grp) from pfdataset where D_grp='AB -ve' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -600,7 +830,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])-2000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_type) from pfdataset where D_date like '%2020%' and D_type='REPLACEMENT' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_type) from pfdataset where D_type='REPLACEMENT' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -612,7 +842,7 @@ def locdata():
     demo1.append('Sep')
     demo1.append(int(tempdata[0][0])-2000)
     chartval1.append(demo1)
-    sq_query="select Count(D_type) from pfdataset where D_date like '%2020%' and D_type='VOLUNTARY' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_type) from pfdataset where  D_type='VOLUNTARY' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -625,7 +855,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])-2000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_gender) from pfdataset where D_date like '%2020%' and D_gender='Male' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_gender) from pfdataset where D_gender='Male' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -638,7 +868,7 @@ def locdata():
     demo1.append(int(tempdata[0][0])+1000)
     chartval1.append(demo1)
     
-    sq_query="select Count(D_gender) from pfdataset where D_date like '%2020%' and D_gender='Female' and D_region like '%"+cloc+"%'"
+    sq_query="select Count(D_gender) from pfdataset where D_gender='Female' and D_region like '%"+cloc+"%'"
     cursor.execute(sq_query)
     tempdata = cursor.fetchall()
     print(tempdata[0][0])
@@ -658,6 +888,22 @@ def locdata():
     cursor.close()  
     
     return render_template('forecast.html', data=data,glat=lat,glon=lon,curloc=cloc,chartval=chartval,chartval1=chartval1)
+    
+    
+@app.route('/locorgandata')
+def locorgandata():
+    cloc = request.args['loc']
+    connection = mysql.connector.connect(host='localhost',database='flaskpfdb',user='root',password='')
+    cursor = connection.cursor()
+    sq_query="select * from organdata where Organ_Name='"+cloc+"' and Status='Accepted'"
+    print(sq_query)
+    cursor.execute(sq_query)
+    tempdata = cursor.fetchall()
+    print(tempdata)
+    connection.close()
+    cursor.close()  
+    
+    return render_template('forecastdonar.html', tempdata=tempdata)
 
 @app.route('/locdatayear')
 def locdatayear():
@@ -1774,4 +2020,4 @@ if __name__ == '__main__':
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run()
+    app.run(debug=True)

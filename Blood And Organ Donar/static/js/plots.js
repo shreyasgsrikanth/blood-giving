@@ -1,46 +1,16 @@
 
-$("#btnorgsubmit").click(function(){
-	debugger;
-	var uname=document.getElementById('oname').value;
-	var oemail=document.getElementById('oemail').value;
-	var ophone=document.getElementById('ophone').value;
-	var oreason=document.getElementById('oreason').value;
-	$.ajax({
-            type: 'GET',
-            url: '/regorg',
-			
-        contentType: 'application/json;charset=UTF-8',
-            data: {
-            'oname': oname,
-            'oemail': oemail,
-            'ophone': ophone,
-            'oreason': oreason
-			
-
-        },
-            
-        dataType:"json",
-            success: function(data) {
-				alerter();
-				//window.location="register";
-				//acheck();
-              // window.location='register';
-            },
-        });
-	
-});
 
 $("#btnregsubmit").click(function(){
 	debugger;
 	var uname=document.getElementById('uname').value;
 	var name=document.getElementById('name').value;
 	var pswd=document.getElementById('pswd').value;
-	var email=document.getElementById('email').value;
+	
 	var phone=document.getElementById('phone').value;
 	var addr=document.getElementById('addr').value;
 	
 	  if (document.getElementById('uname').value =='' && document.getElementById('name').value =='' &&
-	            document.getElementById('pswd').value =='' && document.getElementById('email').value =='' &&
+	            document.getElementById('pswd').value =='' &&
                  document.getElementById('phone').value =='' && document.getElementById('addr').value =='')
 	        {
 	            alert('Please Fill All Fields');
@@ -84,22 +54,10 @@ $("#btnregsubmit").click(function(){
 				 $('#pswd').css('border-color', 'white');
 	            flag = true;
 	        }
-	        var email = document.getElementById('email').value;
-	        var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	        if (!emailReg.test(email) || email == '') {
-	            alert('Please enter a valid email id.');
-				 $('#email').css('border-color', 'Red');
-	            flag = false;
-	            return flag;
-	        }
-	        else {
-				$('#email').css('border-color', 'white');
-	            flag = true;
-	        }
-
+	        
 
 	        var phone = document.getElementById('phone').value;
-	        var intRegex = /^(7|8|9)[0-9]{9}$/;
+	        var intRegex = /^(6|7|8|9)[0-9]{9}$/;
 	        if (!intRegex.test(phone)) {
 	            alert('Please enter a valid phone number.');
 				$('#phone').css('border-color', 'Red');
@@ -143,7 +101,6 @@ $("#btnregsubmit").click(function(){
             data: {
             'uname': uname,
             'name': name,
-            'email': email,
             'phone': phone,
             'pswd': pswd,
             'addr': addr
@@ -379,7 +336,61 @@ $("#btncropsave").click(function(){
 
 
 
+$("#btnorgsubmit").click(function(){
+debugger;
 
+var formdata=new FormData($('#upload-file')[0]);
+	
+	if (document.getElementById('oname').value ==''&& 
+	document.getElementById('oemail').value =='' &&
+	document.getElementById('ophone').value =='' && 
+	document.getElementById('oreason').value =='' &&
+	document.getElementById('age').value =='' && 
+	document.getElementById('gender').value =='' &&
+	document.getElementById('cp').value =='' && 
+	document.getElementById('trestbps').value =='' && 
+	document.getElementById('slope').value ==''&& 
+	document.getElementById('ca').value ==''&&
+	document.getElementById('thal').value ==''&&
+	document.getElementById('oldpeak').value ==''&& 
+	document.getElementById('chol').value ==''&&
+	document.getElementById('fbs').value ==''&& 
+	document.getElementById('restecg').value ==''&& 
+	document.getElementById('thalach').value ==''&& 
+	document.getElementById('exang').value ==''
+	)
+{
+	alert('Please Fill All Fields');
+	return false;
+}
+ if(!termsdata.checked)
+ {
+ alert('Please Accept Terms and Condition');
+ return false;
+ }
+$.ajax({
+	type: 'POST',
+	url: '/regorg',
+	data:formdata,
+	contentType: false,
+	cache: false,
+	processData: false,
+	success: function(data) {
+		console.log('Success!');
+		alert('Data stored successfully');
+	},
+});
+	
+		
+					
+			
+});			
+	       
+		
+
+	
+			
+	
 
 
 
@@ -393,6 +404,17 @@ $("#btnpredict").click(function(){
 	
 	});
 	
+	
+	
+$("#btnpredictorgan").click(function(){
+	debugger;
+	var loc=document.getElementById('loc').value;
+	
+	
+	window.location='/locorgandata?loc='+loc;
+	
+	
+	});
 $("#btnpredictyear").click(function(){
 	debugger;
 	var loc=document.getElementById('loc').value;
@@ -439,11 +461,15 @@ $("#btnlogsubmit").click(function(){
 	debugger;
 	var email=document.getElementById('email').value;
 	var pswd=document.getElementById('pswd').value;
+	
 	 if (document.getElementById('email').value =='' && document.getElementById('pswd').value =='')
 	        {
 	            alert('Please Enter email and password');
 	        }
-	
+	if(email=="8364676936" && pswd=="admin")
+    {
+        window.location="adminhome"
+    }
 	
 	//var gender="";
 	//if(document.getElementById('gen').checked==true)
@@ -452,7 +478,7 @@ $("#btnlogsubmit").click(function(){
 	//	gender="Female";
 	
 	/* window.location='regdata?uname='+uname+'&name='+name+'&pswd='+pswd+'&email='+email+'&phone='+phone+'&addr='+addr;*/
-	
+	else{
 	$.ajax({
             type: 'GET',
             url: '/logdata',
@@ -475,13 +501,14 @@ $("#btnlogsubmit").click(function(){
 				if(data=="Success")
 				{
 					alert('Logged in Successfully');
-				   window.location='dashboard';
+				   window.location='forecast';
 				}
             },
 			 error: function(data) {
                
             }
         });
+	}	
 	
 });
 

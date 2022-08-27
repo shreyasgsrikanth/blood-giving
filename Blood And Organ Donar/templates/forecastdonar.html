@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Automated Blood/Organ Automation Bank</title>
+    <title>Automated Deferral Blood/Organ Donation Bank</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -116,8 +116,8 @@
                                </a>
                            </li>
 						  
-						
-								 <li>
+						   
+						   <li>
                                     <a href="forecast">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" style="
@@ -138,14 +138,6 @@
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" style="
     color: #0f0f10;" data-i18n="nav.dash.main">Donate Organ</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="forecastdonar">
-                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
-                                        <span class="pcoded-mtext" style="
-    color: #0f0f10;" data-i18n="nav.dash.main">Search Organ Donar</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -204,23 +196,21 @@
                            
                             <ul class="pcoded-item pcoded-left-item">
 							
-								 <li>
+								 <li  class="active" style="font-size:18px;font-weight:bolder;">
                                     <a href="forecast">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Search Donors</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-							<li  class="active">
+                                <li>
                                     <a href="forecastyear">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Search Bloodtype</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
-								 
-								<li>
+								 	<li>
                                     <a href="organdonate">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" style="
@@ -228,22 +218,16 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
+								
 								<li>
-                                    <a href="forecastdonar">
-                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
-                                        <span class="pcoded-mtext" style="
-    color: #0f0f10;" data-i18n="nav.dash.main">Search Organ Donar</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
                                     <a href="blooddonate">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i><b></b></span>
                                         <span class="pcoded-mtext" style="
-    color: #0f0f10;text-align:center" data-i18n="nav.dash.main">Donate Blood</span>
+    color: #0f0f10;" data-i18n="nav.dash.main">Donate Blood</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li>								
+                                </li>
+								
                             </ul>
                          
 						 </div>
@@ -273,15 +257,11 @@
 	
 			
 	</div>
-<h5>Your Current location is {{curloc}}</h5>	
-<br/>
-<h6>Your Lattitude is {{glat}}</h6>
-<h6>Your Longitude is {{glon}}</h6>
 
-<label>Enter the location : </label><input type="text" id="loc" name="loc" />
-<label>Enter the Blood Group : </label><input type="text" id="years" name="years" />
-<input type="button" id="btnpredictyear" value="Fetch Results" />
-	<h1>Donors data of the region {{curloc}}</h1>
+
+<label>Enter the Organ Name : </label><input type="text" id="loc" name="loc" />
+<input type="button" id="btnpredictorgan" value="Fetch Results" />
+	<h1>Donors data of Searched Organ</h1>
 											<!-- tabs card start -->
                                             <div class="col-sm-12">
                                                 <div class="card tabs-card">
@@ -295,32 +275,34 @@
  
                                                                       <tr style="background-color:orange;">
                         
-                 
-                                                                             <th>Did</th>
-                                                                            <th>Donor_num</th>
+                 <th>Email</th>
+                                                                            <th>Mobile Number</th>
+                                                                            <th>Age</th>
 																			
-                                                                            <th>Name</th>
-                                                                            <th>Address</th>                     
-                                                                            <th>Region</th> 
+                                                                            <th>Gender</th>
+                                                                            <th>Chest Pain</th>                     
+                                                                            <th>Resting BP</th> 
 																			
-																			<th>Age</th>
-																			<th>Gender</th> 
-																			<th>Weight</th>      
+																			<th>ST segment</th>
+																			<th>Flourosopy</th> 
+																			<th>Heart Condition</th>      
 					
-																			<th>HB</th>
-																			<th>BP</th>
-                                                                            <th>Blood Type</th>
-																			<th>Mobile Number</th>
-																			<th>Location</th>
+																			<th>ST depression</th>
+																			<th>Serum Cholestrol</th>
+                                                                            <th>Fasting Blood Sugar</th>
+																			<th>Resting ECG</th>
+																			<th>Max Heartrate</th>
+																			<th>Induced Angina</th>
+																			<th></th>
                                                                         </tr>
                                                                        
                                                                        
-{% for item in data %}
+{% for item in tempdata %}
 <tr>
-      <td>{{item[0]}}</td>
-    <td>{{item[1]}}</td>
-	 <td>{{item[2]}}</td>
+ <td>{{item[0]}}</td>
+    <td>{{item[2]}}</td>
     <td>{{item[3]}}</td>
+	
     <td>{{item[4]}}</td>
     <td>{{item[5]}}</td>
 	
@@ -329,9 +311,15 @@
     <td>{{item[8]}}</td>
 	
     <td>{{item[9]}} </td>
+	
+	
     <td>{{item[10]}} </td>
     <td>{{item[11]}} </td>
-	<td><button onclick="location.href='map?apikey=j7gkkVCkbNErPfyhHnEfqaqstA8BEtbooEQEolytmHI&latitude={{item[13]}}&longitude={{item[14]}}'" >Get Location</button></td>
+	<td>{{item[12]}} </td>
+    <td>{{item[13]}} </td>
+	<td>{{item[14]}} </td>
+    <td>{{item[15]}} </td>
+	<td>Verified</td>
 </tr>
 {% endfor %}
                                                                     </table>
@@ -388,7 +376,7 @@
 
       var options = {
         chart: {
-          title: 'Prediction for 2022 for region {{curloc}}'
+          title: 'Number of donors donated in region {{curloc}}'
         },
         width: 1000,
         height: 600
@@ -399,8 +387,8 @@
       }
     </script>
 	
-	<!-- <h6>Chart</h6> -->
-				<!-- <div id="chart_div"></div> -->
+	<h6>Chart</h6>
+				<div id="chart_div"></div>
 											</div>
 											{% endif %}
 											
@@ -539,7 +527,7 @@
 
 
 <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
-<script src="/static/js/plots.js"></script>
+
 
 <script>
 debugger;

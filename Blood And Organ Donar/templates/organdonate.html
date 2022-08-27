@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>registerr</title>
+   <title>register</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <meta name="keywords" content="Medical Care a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 	<!-- banner -->
-	<div id="home" class="" style="height:760px;background-color:pink;"> 
+	<div id="home" class="" style="height:760px;background-color:aliceblue;"> 
 		<!-- header -->
 		<div class="header-w3layouts"> 
 			<!-- Navigation -->
@@ -61,10 +61,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="nav navbar-nav navbar-right cl-effect-15">
 							<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 							<li class="hidden"><a class="page-scroll" href="#page-top"></a>	</li>
-							<li><a id="homed" href="index">Home</a></li>
-							<li><a id="register"  href="register">Register</a></li>
-								<li><a id="login"   href="login">Login</a></li>
-							
+				
+								<li><a id="forecast"   href="forecast">Search Donors</a></li>
+							<li><a id="organdonate"   href="organdonate">Donate Organs</a></li>
+							<li><a id="forecastyear"   href="forecastyear">Search Bloodtype</a></li>
+							<li><a id="forecastyear"   href="forecastyear">Donate Blood</a></li>
+						
+						
 <script>
 $("#homed").click(function(){
   window.location='index.aspx';
@@ -84,51 +87,220 @@ $("#register").click(function(){
 		<!-- //header -->
 		<!--banner-->
 		<!--Slider-->
-        <form id="f1" runat="server">
 			<div class="" >
-				
+				<form id="upload-file" method="post" enctype="multipart/form-data">
 			    <div class="col-md-6">
-                    <img src="/static/assets/images/rig.jpg" style="height:600px;width:100%;padding-top:80px;" />
-
-			    </div>
-			    <div class="col-md-6" style="padding-top:80px;">
                     <h1 style="text-align:center;font-weight:bolder;padding:20px 0px;">Welcome to Organ Donation Form</h1>
                         <div class="form-group" style="font-size:20px;padding-bottom:10px;">
                                
-                                <input type="text" class="form-control" id="oname"  runat="server" placeholder="Enter Organ Name">
+                                <input type="text" class="form-control" id="oname" name="oname"  runat="server" placeholder="Enter Organ Name">
                         </div>
 
                    
 
                      <div class="form-group" style="font-size:20px;padding-bottom:10px;">
                          
-                                <input type="email" class="form-control" id="oemail"  runat="server"  placeholder="Enter Email">
+                                <input type="email" class="form-control" id="oemail" name="oemail"  runat="server"  placeholder="Enter Email">
                         </div>
 
                      <div class="form-group" style="font-size:20px;padding-bottom:10px;">
                              
-                                <input type="number" class="form-control" id="0phone"  runat="server"  placeholder="Enter Phone#">
+                                <input type="number" class="form-control" id="ophone" name="ophone"  runat="server"  placeholder="Enter Phone#">
                         </div>
                     
                     
                      <div class="form-group" style="font-size:20px;padding-bottom:10px;">
                             
-                         <textarea class="form-control" id="oreason" runat="server"  placeholder="Enter Reason"></textarea>
+                         <textarea class="form-control" id="oreason" runat="server" name="oreason"  placeholder="Enter Reason"></textarea>
                         </div>
 
+
+
+<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <input type="text" class="form-control" id="age" name="age"  runat="server"  placeholder="Age">
+                        </div>    
+ <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="gender" name="gender" runat="server">
+                                        <option value="">-- Gender --</option>
+                                        <option value="1">Male</option>
+                                        <option value="0">Female</option>
+                                    </select>
+                        </div> 	    
+ <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="cp" name="cp" runat="server">
+                                        <option value="">-- Chest Pain Type --</option>
+                                        <option value="0">None</option>
+                                        <option value="1">Typical angina</option>
+                                        <option value="2">Atypical angina</option>
+                                        <option value="3">Non-anginal pain</option>
+                                        <option value="4">Asymptomatic</option>
+                                    </select>
+                        </div> 											
+
+  <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <input type="text" class="form-control" id="trestbps" name="trestbps"  runat="server"  placeholder="Resting Blood Pressure in Hg">
+                        </div>   						
+          
+       
+ <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="slope" name="slope" runat="server">
+                                        <option value="">-- Slope of the peak exercise ST segment --</option>
+                                        <option value="1">Upsloping</option>
+                                        <option value="2">Flat</option>
+                                        <option value="3">Downsloping</option>
+                                    </select>
+                        </div> 
+						
+									
+          
+       <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="ca" name="ca" runat="server">
+                                        <option value="">-- Major Vessels by flourosopy --</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                        </div> 
+						
+						          
+       <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="thal" name="thal" runat="server">
+                                        <option value="">-- Heart Condition--</option>
+                                        <option value="1">Normal</option>
+                                        <option value="2">Fixed Defect</option>
+                                        <option value="3">Reversable defect</option>
+                                    </select>
+                        </div> 
+						 <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                               <input type="email" class="form-control" id="oldpeak" name="oldpeak" runat="server"  placeholder="ST depression induced(max 6.5)">
+                        </div> 
+						<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                       
+                         
+                                <input type="text" class="form-control" id="oloc" name="oloc" runat="server"  placeholder="Enter Location">
+                           
+						
+			    </div>
+			    </div>
+			    <div class="col-md-6" style="padding-top:80px;">
+                    	
+	<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <input type="text" class="form-control" id="chol" name="chol" runat="server"  placeholder="Serum Cholestrol mg/dl">
+                        </div>  					
+          
+       <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="fbs" name="fbs" runat="server">
+                                        <option value="">-- Fasting Blood Sugar --</option>
+                                        <option value="1">&gt120 mg/dl</option>
+                                        <option value="0">&lt=120 mg/dl</option>
+                                    </select>
+                        </div> 	
+
+       <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="restecg" name="restecg" runat="server">
+                                        <option value="">-- Resting ECG results --</option>
+                                        <option value="2">Showing probabale variant</option>
+                                        <option value="1">ST-T wave abnormality</option>
+                                        <option value="0">Normal</option>
+                                    </select>
+                        </div>
+	
+       <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                               <input type="text" class="form-control" id="thalach" name="thalach"  runat="server"  placeholder="Maximum heart rate achieved">
+                        </div> 					
+          
+       <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+                                <select class="form-control show-tick" id="exang" name="exang" runat="server">
+                                        <option value="">-- Exercise induced angina --</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                        </div> 					
+           
+      
+			
+			<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+						   
+						 
+			
                     
 
                      <div class="form-group" style="font-size:20px;padding-bottom:10px;">
                          
-						    
-						  <input type="button" id="btnorgsubmit" Class="btn btn-success"  value="submit" />
+						    <label style="color:white">Upload Id Proof</label>
+							<input type="file" name="filedata1" id="filedata1" accept=".png">
                         </div>
 
                     
                    
 			    </div>
+				<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+						   
+						 
+			
+                    
+
+                     <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+						   
+						  <input type="checkbox" id="termsdata" />
+						  <label style="color:white">**By Submitting this I accept the terms and conditions for donating the organ and I am responsible and the decision is volunteer</label>
+                        </div>
+
+                    
+                   
+			    </div>
+				<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+						   
+						 
+			
+                    
+
+                     <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+						    <label style="color:white">Upload E-sign</label>
+							<input type="file" name="filedata2" id="filedata2" accept=".png">
+                        </div>
+
+                    
+                   
+			    </div>
+			 <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+						   
+						 
+			
+                    
+
+                     <div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                         
+						    
+						  <input type="button" id="btnorgsubmit"  style="width:100%" Class="btn btn-success"  value="submit" />
+                        </div>
+
+                    
+                   
+			    </div>
+				
 			</div>
-        </form>
 		<!--//banner-->
 		
 	</div>	
@@ -280,67 +452,9 @@ fit: true
 
 
 
+
+
 <script src="/static/js/plots.js"></script>
-<script>
-function Validator() {
-	        debugger;	
-	        if (document.getElementById('uname').value =='' && document.getElementById('name').value =='' &&
-	            document.getElementById('pswd').value =='' && document.getElementById('email').value =='' &&
-                 document.getElementById('phone').value =='' && document.getElementById('addr').value =='')
-	        {
-	            alert('Please Fill All Fields');
-	        }
-	        var flag = true;
-
-	        var unamer = document.getElementById('uname').value;
-	        var intRegexunamer = /^[A-Za-z 0-9]+$/;
-	        if (!intRegexunamer.test(unamer)) {
-	            alert('Please enter a valid name.');
-	            flag = false;
-	            return flag;
-	        }
-	        else {
-	            flag = true;
-	        }
-
-	        var namer = document.getElementById('name').value;
-	        var intRegexnamer = /^[A-Za-z ]+$/;
-	        if (!intRegexnamer.test(namer)) {
-	            alert('Please enter a  name.');
-	            flag = false;
-	            return flag;
-	        }
-	        else {
-	            flag = true;
-	        }
-	        var email = document.getElementById('email').value;
-	        var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	        if (!emailReg.test(email) || email == '') {
-	            alert('Please enter a valid email id.');
-	            flag = false;
-	            return flag;
-	        }
-	        else {
-	            flag = true;
-	        }
-
-
-	        var phone = document.getElementById('phone').value;
-	        var intRegex = /^(7|8|9)[0-9]{9}$/;
-	        if (!intRegex.test(phone)) {
-	            alert('Please enter a valid phone number.');
-	            flag = false;
-	            return flag;
-	        }
-	        else {
-	            flag = true;
-	        }
-
-	        return flag;
-	    }
-
-</script>
-
 
 </body>
 </html>

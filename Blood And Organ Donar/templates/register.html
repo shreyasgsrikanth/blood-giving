@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>registerr</title>
+   <title>register</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <meta name="keywords" content="Medical Care a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 	<!-- banner -->
-	<div id="home" class="" style="height:760px;background-color:pink;"> 
+	<div id="home" class="" style="height:760px;background-color:aliceblue;"> 
 		<!-- header -->
 		<div class="header-w3layouts"> 
 			<!-- Navigation -->
@@ -88,7 +88,7 @@ $("#register").click(function(){
 			<div class="" >
 				
 			    <div class="col-md-6">
-                    <img src="/static/assets/images/rig.jpg" style="height:600px;width:100%;padding-top:80px;" />
+                    <img src="/static/assets/images/reg.jpg" style="height:600px;width:100%;padding-top:80px;" />
 
 			    </div>
 			    <div class="col-md-6" style="padding-top:80px;">
@@ -103,21 +103,71 @@ $("#register").click(function(){
                                 <input type="text" class="form-control" id="name"  runat="server"  placeholder="Enter Name">
                         </div>
 
+						<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+											<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                            
+						<input type="number" class="form-control" id="age"  runat="server"  placeholder="Enter Age">
+				</div>
+                            
+							<input type="text" class="form-control" id="fname"  runat="server"  placeholder="Enter Father Name">
+					</div>
+
+
+
+						<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                            
+							<input type="text" class="form-control" id="mname"  runat="server"  placeholder="Enter Mother Name">
+					</div>
+
+					<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+						<label for="city">city</label>
+                     <select name="city" id="city">
+						<option value="">Mysore</option>
+						<option value="">Mangalore</option>
+						<option value="">Bangalore</option>
+						<option value="">Mandya</option>
+						<option value="">Chamarajanagar</option>
+						<option value="">other</option>
+					</select>
+					</div>
+					<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+						<label for="gender">Gender</label>
+					<label class="radio-inline"><input type="radio" name="gender">Male</label>
+<label class="radio-inline"><input type="radio" name="gender">Female</label>
+<label class="radio-inline"><input type="radio" name="gender">Other</label>
+</div>
+
+
+
+
+
+<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+	<label for="bloodtype">Bloodtype</label>
+ <select name="bloodtype" id="bloodtype">
+	<option value="">A +ve</option>
+	<option value="">A -ve</option>
+	<option value="">B -ve</option>
+	<option value="">B +ve</option>
+	<option value="">AB +ve</option>
+	<option value="">AB -ve</option>
+	<option value="">O +ve</option>
+	<option value="">O -ve</option>
+</select>
+</div>
+			<div class="form-group" style="font-size:20px;padding-bottom:10px;">
+                             
+                                <input type="number" class="form-control" id="phone"  runat="server"  placeholder="Enter Phone#">
+                        </div>
+                    
+
                      <div class="form-group" style="font-size:20px;padding-bottom:10px;">
                            
                                 <input type="password" class="form-control" id="pswd"  runat="server"  placeholder="Enter Password">
                         </div>
 
-                     <div class="form-group" style="font-size:20px;padding-bottom:10px;">
-                         
-                                <input type="email" class="form-control" id="email"  runat="server"  placeholder="Enter Email">
-                        </div>
-
-                     <div class="form-group" style="font-size:20px;padding-bottom:10px;">
-                             
-                                <input type="number" class="form-control" id="phone"  runat="server"  placeholder="Enter Phone#">
-                        </div>
                     
+
+                     
                     
                      <div class="form-group" style="font-size:20px;padding-bottom:10px;">
                             
