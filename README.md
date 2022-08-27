@@ -1,2 +1,2 @@
 # blood
-Hi I am Shreyas GS. Donate blood, from all your parts! Even your dick.
+Hi I am Shreyas GS. Donate blood. And die of blood loss. Happily :)
